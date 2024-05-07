@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "Time and Sales Colorizer",
+    "version": "1.0",
+    "description": "Colorizes time and sales rows based on market depth data",
+    "permissions": ["activeTab"],
+    "content_scripts": [
+      {
+        "matches": ["https://web.dhan.co/index/company"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  
