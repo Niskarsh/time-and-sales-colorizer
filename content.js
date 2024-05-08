@@ -3,8 +3,8 @@ function fetchMarketDepthData() {
     const highestBidElement = document.querySelector('.buyDepth .depthTable tbody tr:first-child td:nth-child(3)');
     const lowestAskElement = document.querySelector('.sellDepth .depthTable tbody tr:first-child .text-left.redLtp');
     return {
-        highestBid: parseFloat(highestBidElement? highestBidElement.innerText: 0),
-        lowestAsk: parseFloat(lowestAskElement? lowestAskElement.innerText: 0)
+        highestBid: parseFloat(highestBidElement ? highestBidElement.innerText : 0),
+        lowestAsk: parseFloat(lowestAskElement ? lowestAskElement.innerText : 0)
     };
 }
 
@@ -22,23 +22,34 @@ function colorizeTimeAndSalesRows() {
 
         // Iterate over each row and compare prices
         timeAndSalesRows.forEach(row => {
-            const priceElement = row.querySelector('td:nth-child(3)'); // Select the third child (index 2)
-            const tradedQuantity = row.querySelector('td:nth-child(2)');
-            //console.log(tradedQuantity)
-            if (priceElement && highestBid && lowestAsk) {
-                const price = parseFloat(priceElement.innerText);
-                // alert(price)
+            if (!row.classList.contains('colorized')) {
+                const priceElement = row.querySelector('td:nth-child(3)'); // Select the third child (index 2)
+                const tradedQuantity = row.querySelector('td:nth-child(2)');
+                // console.log(tradedQuantity.innerText)
+                if (priceElement && highestBid && lowestAsk) {
+                    const price = parseFloat(priceElement.innerText);
+                    // alert(price)
 
-                // Apply color based on comparison with market depth data
-                if (price === highestBid) {
-                    row.style.backgroundColor = 'red';
-                    priceElement.style.color = 'white'; // Change text color for highest bid
-                    
-                } else if (price === lowestAsk) {
-                    row.style.backgroundColor = 'green';
-                    priceElement.style.color = 'white';
-                } else if (price > highestBid && price < lowestAsk) {
-                    row.style.color = 'white'; // Change text color for prices between bid and ask
+                    // Apply color based on comparison with market depth data
+                    if (price === highestBid) {
+                        row.style.backgroundColor = 'red';
+                        priceElement.style.color = 'white'; // Change text color for highest bid
+
+                    } else if (price === lowestAsk) {
+                        row.style.backgroundColor = 'green';
+                        priceElement.style.color = 'white';
+                    } else if (price > highestBid && price < lowestAsk) {
+                        row.style.color = 'white'; // Change text color for prices between bid and ask
+                    }
+
+                    if (tradedQuantity && parseFloat(tradedQuantity.innerText) && parseFloat(tradedQuantity.innerText) > 100) {
+                        tradedQuantity.style.color = 'white'
+                        tradedQuantity.style.fontWeight = 'bold';
+                        // console.log(tradedQuantity.innerText)
+                    }
+
+                    // Add class to mark row as colorized
+                    row.classList.add('colorized');
                 }
 
                 if (tradedQuantity && parseFloat(tradedQuantity.innerText) && parseFloat(tradedQuantity.innerText)>100) {
