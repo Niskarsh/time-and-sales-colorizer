@@ -24,7 +24,7 @@ function colorizeTimeAndSalesRows() {
         timeAndSalesRows.forEach(row => {
             const priceElement = row.querySelector('td:nth-child(3)'); // Select the third child (index 2)
             const tradedQuantity = row.querySelector('td:nth-child(2)');
-            console.log(tradedQuantity)
+            //console.log(tradedQuantity)
             if (priceElement && highestBid && lowestAsk) {
                 const price = parseFloat(priceElement.innerText);
                 // alert(price)
@@ -43,7 +43,7 @@ function colorizeTimeAndSalesRows() {
 
                 if (tradedQuantity && parseFloat(tradedQuantity.innerText) && parseFloat(tradedQuantity.innerText)>100) {
                     tradedQuantity.style.fontWeight = 'bold';
-                    console.log(tradedQuantity.innerText)
+                    //console.log(tradedQuantity.innerText)
                 }
 
                 // Add class to mark row as colorized
